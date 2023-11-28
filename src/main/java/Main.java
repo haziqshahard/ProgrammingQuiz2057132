@@ -19,20 +19,20 @@ public class Main {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        Patient Daph = new Patient("Daphne Von Oram",62, DaphneURL);
-        Daph.setMRIdetails(LocalDate.of(2023,9,14),DaphneMRIURL,2);
-        Daph.setBPdetails(LocalDate.of(2023,9,15),130,70,"ST");
+        Patient Daphne = new Patient("Daphne Von Oram",62, DaphneURL);
+        Daphne.setMRIdetails(LocalDate.of(2023,9,14),DaphneMRIURL,2);
+        Daphne.setBPdetails(LocalDate.of(2023,9,15),130,70,"ST");
         Patient Sebastian = new Patient("Sebastian Compton", 31, SebastianURL);
         Sebastian.setMRIdetails(LocalDate.of(2023,11,19),SebastianMRIURL,4);
         Sebastian.setBPdetails(LocalDate.of(2023,11,20),150,80,"VST");
 
         ArrayList<Patient> patients = new ArrayList<>();
-        patients.add(Daph);
+        patients.add(Daphne);
         patients.add(Sebastian);
 
         Doctor.view(patients);
         Administrator.view(patients);
-        Administrator.view(Daph);
+        Administrator.view(Daphne);
 
     }
 }
