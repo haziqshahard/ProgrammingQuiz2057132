@@ -1,3 +1,5 @@
+import Examinations.Exams;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -7,6 +9,8 @@ import java.util.ArrayList;
 public class Doctor {
     static GraphicsConfiguration gc;
     ArrayList<Patient> patients = new ArrayList<>();
+
+    public static ArrayList<JPanel> panels = new ArrayList<>();
     public JFrame frame = new JFrame(gc);
     public static void view(ArrayList<Patient> patients){
         JFrame frame = new JFrame(gc);
@@ -22,28 +26,41 @@ public class Doctor {
             ImageIcon picture = new ImageIcon(patient.picture);
             ImageIcon MRIpicture = new ImageIcon(patient.MRI.imageURL);
 
-            patientPanel.setLayout(new GridLayout(1,4));
+            //Patient info and Image
+            patientPanel.setLayout(new GridLayout(1,0));
             JLabel pictureLabel = new JLabel();
             pictureLabel.setIcon(picture);
             patientImage.add(pictureLabel);
-
-            JLabel MRILabel = new JLabel();
-            MRILabel.setIcon(MRIpicture);
-            MRIImage.add(MRILabel);
 
             JLabel patlabel = new JLabel();
             patlabel.setText("<html>Name: "+ patient.name+ "<br>" +"Age: "+ patient.age +"</html>");
             patientDetails.add(patlabel);
 
+            //Patient Examination Info and Details
+            JLabel MRILabel = new JLabel();
+            MRILabel.setIcon(MRIpicture);
+            MRILabel.setBorder(BorderFactory.createLineBorder(Color.black));
+            MRIImage.add(MRILabel);
+
             JLabel BPlabel = new JLabel();
             BPlabel.setText("<html>Blood Pressure <br>" + patient.BP.syst + " over " + patient.BP.dias +"</html>");
             BPDetails.add(BPlabel);
+
+            patientImage.setBorder(BorderFactory.createLineBorder(Color.black));
+            MRIImage.setBorder(BorderFactory.createLineBorder(Color.black));
+            patientDetails.setBorder(BorderFactory.createLineBorder(Color.black));
+            patientPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
             patientPanel.add(patientImage);
             patientPanel.add(patientDetails);
             patientPanel.add(MRIImage);
             patientPanel.add(BPDetails);
             frame.add(patientPanel);
+            for(int i=0;i<panels.size();i++){
+                JPanel newPanel = new JPanel();
+                newPanel.add(panels.get(i));
+                patientPanel.add(newPanel);
+            }
 
         }
         frame.setVisible(true);
@@ -66,7 +83,7 @@ public class Doctor {
         ImageIcon picture = new ImageIcon(patient.picture);
         ImageIcon MRIpicture = new ImageIcon(patient.MRI.imageURL);
 
-        patientPanel.setLayout(new GridLayout(1,4));
+        patientPanel.setLayout(new GridLayout(1,0));
         JLabel pictureLabel = new JLabel();
         pictureLabel.setIcon(picture);
         patientImage.add(pictureLabel);
@@ -83,6 +100,10 @@ public class Doctor {
         BPlabel.setText("<html>Blood Pressure <br>" + patient.BP.syst + " over " + patient.BP.dias +"</html>");
         BPDetails.add(BPlabel);
 
+        for(int i=0;i<panels.size();i++){
+            patientPanel.add(panels.get(i));
+        }
+
         patientPanel.add(patientImage);
         patientPanel.add(patientDetails);
         patientPanel.add(MRIImage);
@@ -96,5 +117,10 @@ public class Doctor {
             }
         });
 
+    }
+
+    public static void setExaminationPanels(JPanel panel){
+        panels.add(panel);
+        //For a user to add any additional examinations by adding a new JPanel
     }
 }
