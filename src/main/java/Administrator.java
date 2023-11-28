@@ -9,6 +9,7 @@ public class Administrator extends JFrame {
 
     static GraphicsConfiguration gc;
     ArrayList<Patient> patients = new ArrayList<>();
+    public static ArrayList<JPanel> panels = new ArrayList<>();
 
     public static void view(ArrayList<Patient> patients) {
         JFrame frame = new JFrame(gc);
@@ -65,6 +66,10 @@ public class Administrator extends JFrame {
             }
         });
 
+    }
+    public static void setExaminationPanels(JPanel panel){
+        panels.add(panel);
+        //For a user to add any additional examinations by adding a new JPanel
     }
 }
 
